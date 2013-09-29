@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+
+use strict;
+use FindBin;
+
+    my $projects = "$ENV{HOME}/Work";
+    my $template = $FindBin::RealBin;
+   #my $template = "$projects/scala-template";
+
+    die 'Usage: scalaproj name-of-project' if $#ARGV != 0;
+    my $project = $ARGV[0];
+    my $package = $project;
+    $package =~ tr/_+\-//d;
+    system("rsync -av --exclude .hg/ $template/ $projects/$project") && die "rsync failed: $!";
+    chdir("$projects/$project") || die "chdir() failed: $!";
+    my @files = qw(
+        build.sbt
+        pom.xml
+        src/main/scala/package/Main.scala
+        src/test/scala/package/test/Test.scala
+        src/test/resources/log4j.properties
+    );
+    undef $/;
+    foreach my $file (@files) {
+        open(my $f, '+<', $file) || die "Unable to open $file: $!";
+        my $content = <$f>;
+        seek($f, 0, 0);
+        truncate($f, 0);
+        $content =~ s/\$project/$project/g;
+        $content =~ s/\$package/$package/g;
+        syswrite($f, $content);
+        close($f);
+    }
+    rename('src/main/scala/package', "src/main/scala/$package") || die "Unable to rename: $!";
+    rename('src/test/scala/package', "src/test/scala/$package") || die "Unable to rename: $!";
