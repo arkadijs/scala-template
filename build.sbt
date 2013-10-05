@@ -8,13 +8,14 @@ scalacOptions ++= Seq("-encoding", "UTF-8")
 
 javacOptions ++= Seq("-encoding", "UTF-8")
 
+// stack trace in tests
 //testOptions in Test += Tests.Argument("-oDF")
 
 javaOptions in run += "-Xmx2g"
 
 fork in run := true
 
-mainClass := Some("$package.Main")
+mainClass in (Compile, run) := Some("$package.Main")
 
 resolvers ++= Seq(
     Classpaths.typesafeResolver,
@@ -28,6 +29,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+    // http://jesseeichar.github.io/scala-io-doc/
     "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.2",
     "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.2",
     "log4j" % "log4j" % "1.2.17",
