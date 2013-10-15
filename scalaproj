@@ -3,16 +3,13 @@
 use strict;
 use FindBin;
 
-    my $projects = "$ENV{HOME}/Work";
-    my $template = $FindBin::RealBin;
-   #my $template = "$projects/scala-template";
-
     die 'Usage: scalaproj name-of-project' if $#ARGV != 0;
+    my $template = $FindBin::RealBin;
     my $project = $ARGV[0];
     my $package = $project;
     $package =~ tr/_+\-//d;
-    system("rsync -av --exclude .hg/ $template/ $projects/$project") && die "rsync failed: $!";
-    chdir("$projects/$project") || die "chdir() failed: $!";
+    system("rsync -av --exclude .hg/ $template/ $project") && die "rsync failed: $!";
+    chdir("$project") || die "chdir() failed: $!";
     my @files = qw(
         build.sbt
         pom.xml
