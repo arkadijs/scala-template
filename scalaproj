@@ -9,7 +9,7 @@ use FindBin;
     my $package = $project;
     $package =~ tr/_+\-//d;
     system("rsync -av --exclude .hg/ $template/ $project") && die "rsync failed: $!";
-    chdir("$project") || die "chdir() failed: $!";
+    chdir($project) || die "chdir($project) failed: $!";
     my @files = qw(
         build.sbt
         pom.xml
