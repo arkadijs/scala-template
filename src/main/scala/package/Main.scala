@@ -17,6 +17,6 @@ object Main {
   }
 
   def main(args: Array[String]) {
-    if (args.size != 1) usage()
+    if (args.length != 1) usage()
   }
 }
