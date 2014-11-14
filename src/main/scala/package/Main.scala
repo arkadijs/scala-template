@@ -5,7 +5,7 @@ import scala.util.control.Breaks._
 
 object Main {
 
-  //val log = org.log4j.
+  val log = org.slf4j.LoggerFactory.getLogger(getClass)
 
   private def usage() {
     println("""
@@ -18,5 +18,7 @@ object Main {
 
   def main(args: Array[String]) {
     if (args.length != 1) usage()
+    println(s"Hello ${args.head}!")
+    log.info("See ya {}!", args.head)
   }
 }
