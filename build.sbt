@@ -2,7 +2,7 @@ name := "$project"
 
 version := "1.0"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.11.4"
 
 scalacOptions ++= Seq("-encoding", "UTF-8")
 
@@ -30,10 +30,11 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
     // http://jesseeichar.github.io/scala-io-doc/
-    "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.2",
-    "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.2",
+    "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3-1",
+    "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3-1",
     "log4j" % "log4j" % "1.2.17",
-    "org.slf4j" % "slf4j-api" % "1.7.5",
-    "org.slf4j" % "slf4j-log4j12" % "1.7.5",
-    "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+    "org.slf4j" % "slf4j-api" % "1.7.7",
+    "org.slf4j" % "slf4j-log4j12" % "1.7.7",
+    "org.scalatest" %% "scalatest" % "2.2.2" % "test",
+    "org.scalacheck" %% "scalacheck" % "1.11.6" % "test"
 )
