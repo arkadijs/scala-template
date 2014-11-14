@@ -15,6 +15,7 @@ use FindBin;
         pom.xml
         src/main/scala/package/Main.scala
         src/test/scala/package/test/Test.scala
+        src/main/resources/log4j.properties
         src/test/resources/log4j.properties
     );
     undef $/;
