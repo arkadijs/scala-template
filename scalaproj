@@ -8,7 +8,8 @@ use FindBin;
     my $project = $ARGV[0];
     my $package = $project;
     $package =~ tr/_+\-//d;
-    system("rsync -av --exclude .hg/ $template/ $project") && die "rsync failed: $!";
+    mkdir($project) || die "`mkdir` failed: $!";
+    system("cp -prdn $template/* $project/") && die "`cp` failed: $!";
     chdir($project) || die "chdir($project) failed: $!";
     my @files = qw(
         build.sbt
@@ -31,3 +32,4 @@ use FindBin;
     }
     rename('src/main/scala/package', "src/main/scala/$package") || die "Unable to rename: $!";
     rename('src/test/scala/package', "src/test/scala/$package") || die "Unable to rename: $!";
+    print "`$project` created\n";
