@@ -1,35 +1,8 @@
-#!/usr/bin/perl -w
-
-use strict;
-use FindBin;
-
-    die 'Usage: scalaproj name-of-project' if $#ARGV != 0;
-    my $template = $FindBin::RealBin;
-    my $project = $ARGV[0];
-    my $package = $project;
-    $package =~ tr/_+\-//d;
-    mkdir($project) || die "`mkdir` failed: $!";
-    system("cp -prdn $template/* $project/") && die "`cp` failed: $!";
-    chdir($project) || die "chdir($project) failed: $!";
-    my @files = qw(
-        build.sbt
-        pom.xml
-        src/main/scala/package/Main.scala
-        src/test/scala/package/test/Test.scala
-        src/main/resources/log4j.properties
-        src/test/resources/log4j.properties
-    );
-    undef $/;
-    foreach my $file (@files) {
-        open(my $f, '+<', $file) || die "Unable to open $file: $!";
-        my $content = <$f>;
-        seek($f, 0, 0);
-        truncate($f, 0);
-        $content =~ s/\$project/$project/g;
-        $content =~ s/\$package/$package/g;
-        syswrite($f, $content);
-        close($f);
-    }
-    rename('src/main/scala/package', "src/main/scala/$package") || die "Unable to rename: $!";
-    rename('src/test/scala/package', "src/test/scala/$package") || die "Unable to rename: $!";
-    print "`$project` created\n";
+#!/bin/sh
+project=$1
+if test -z "$project"; then
+    echo "Usage: scalaproj <project-dir>"
+    exit 1
+fi
+template=$(dirname "$0")
+exec java -cp "$template/bin/" ScalaProj "$template" "$project"
