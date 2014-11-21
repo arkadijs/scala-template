@@ -9,6 +9,11 @@ public class ScalaProj {
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
             System.err.println("Usage: ScalaProj <template-dir> <new-project-dir>");
+            System.err.println("args length = " + args.length);
+            int i = 0;
+            for (String arg : args) {
+                System.err.println("arg " + (i++) + " = " + arg);
+            }
             System.exit(1);
 
         }
@@ -20,14 +25,14 @@ public class ScalaProj {
 
         copy(fs.getPath(template), fs.getPath(project));
 
-        List<String> files = Arrays.asList(new String[] {
+        String[] files = new String[] {
             "build.sbt",
             "pom.xml",
             "src/main/scala/package/Main.scala",
             "src/test/scala/package/test/Test.scala",
             "src/main/resources/log4j.properties",
             "src/test/resources/log4j.properties"
-        });
+        };
         String cs = "UTF-8";
         for (String file : files) {
             String content = new String(Files.readAllBytes(fs.getPath(template, file)), cs);
@@ -35,10 +40,10 @@ public class ScalaProj {
             Files.write(fs.getPath(project, file), content.getBytes(cs), StandardOpenOption.TRUNCATE_EXISTING);
         }
 
-        List<String> dirs = Arrays.asList(new String[]{
+        String[] dirs = new String[]{
                 "src/main/scala/package",
                 "src/test/scala/package"
-        });
+        };
         for (String dir : dirs) {
             Path path = fs.getPath(project, dir);
             Files.move(path, path.resolveSibling(pkg));
@@ -56,8 +61,8 @@ public class ScalaProj {
 
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                if (file.toFile().getName().toLowerCase().startsWith("scalaproj")) return FileVisitResult.SKIP_SUBTREE;
-                Files.copy(file, target.resolve(source.relativize(file)));
+                if (!file.toFile().getName().toLowerCase().startsWith("scalaproj"))
+                    Files.copy(file, target.resolve(source.relativize(file)));
                 return FileVisitResult.CONTINUE;
             }
         });
