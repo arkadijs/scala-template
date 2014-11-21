@@ -1,6 +1,6 @@
 ### A template for bare Scala project
 
-To start learning or teaching Scala I use this template to quickly bootstrap minimalistic Scala project. It includes SBT for canonical Scala workflow and Maven pom for universal Java IDE integration.
+To start learning or teaching Scala I use this template to quickly bootstrap minimalistic Scala project. It includes SBT for canonical Scala workflow and Maven pom for universal Java IDE integration. Working Java 7+ installation is a pre-requisite. Scala installation is not required.
 
 #### Linux, Mac
 
