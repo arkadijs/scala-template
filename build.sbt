@@ -11,7 +11,7 @@ javacOptions ++= Seq("-encoding", "UTF-8")
 // stack trace in tests
 //testOptions in Test += Tests.Argument("-oDF")
 
-javaOptions in run += "-Xmx2g"
+javaOptions in run += "-Xmx1g"
 
 fork in run := true
 
