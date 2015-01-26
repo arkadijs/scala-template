@@ -4,5 +4,15 @@ if test -z "$project"; then
     echo "Usage: scalaproj <project-dir>"
     exit 1
 fi
-template=$(dirname "$0")
+# MacOSX has no `readlink -e`
+link=$(readlink -n "$0")
+if test -z "$link"; then
+    template=$(dirname "$0")
+else
+    cwd=$(pwd)
+    cd $(dirname "$0")
+    cd $(dirname "$link")
+    template=$(pwd -P)
+    cd "$cwd"
+fi
 exec java -cp "$template/bin/" ScalaProj "$template" "$project"
