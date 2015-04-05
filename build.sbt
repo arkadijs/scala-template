@@ -17,6 +17,8 @@ fork in run := true
 
 mainClass in (Compile, run) := Some("$package.Main")
 
+net.virtualvoid.sbt.graph.Plugin.graphSettings
+
 resolvers ++= Seq(
     Classpaths.typesafeResolver,
     "Local repo"    at "file:///"+Path.userHome.absolutePath+"/.m2/repository",
