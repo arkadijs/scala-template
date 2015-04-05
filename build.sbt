@@ -2,9 +2,9 @@ name := "$project"
 
 version := "1.0"
 
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.6"
 
-scalacOptions ++= Seq("-encoding", "UTF-8")
+scalacOptions ++= Seq("-encoding", "UTF-8", "-feature")
 
 javacOptions ++= Seq("-encoding", "UTF-8")
 
@@ -33,8 +33,8 @@ libraryDependencies ++= Seq(
     "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3-1",
     "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3-1",
     "log4j" % "log4j" % "1.2.17",
-    "org.slf4j" % "slf4j-api" % "1.7.7",
-    "org.slf4j" % "slf4j-log4j12" % "1.7.7",
-    "org.scalatest" %% "scalatest" % "2.2.2" % "test",
-    "org.scalacheck" %% "scalacheck" % "1.11.6" % "test"
+    "org.slf4j" % "slf4j-api" % "1.7.12",
+    "org.slf4j" % "slf4j-log4j12" % "1.7.12",
+    "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+    "org.scalacheck" %% "scalacheck" % "1.12.2" % "test"
 )
