@@ -1,20 +1,12 @@
-name := "$project"
-
-version := "1.0"
-
+        name := "$project"
+     version := "1.0"
 scalaVersion := "2.11.6"
 
 scalacOptions ++= Seq("-encoding", "UTF-8", "-feature")
-
-javacOptions ++= Seq("-encoding", "UTF-8")
-
-// stack trace in tests
-//testOptions in Test += Tests.Argument("-oDF")
-
-javaOptions in run += "-Xmx1g"
-
-fork in run := true
-
+ javacOptions ++= Seq("-encoding", "UTF-8")
+//testOptions in Test += Tests.Argument("-oDF") // stack trace in tests
+javaOptions in run += "-Xmx256m"
+       fork in run := true
 mainClass in (Compile, run) := Some("$package.Main")
 
 net.virtualvoid.sbt.graph.Plugin.graphSettings
