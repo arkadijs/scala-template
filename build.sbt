@@ -2,7 +2,7 @@
      version := "1.0"
 scalaVersion := "2.11.6"
 
-scalacOptions ++= Seq("-encoding", "UTF-8", "-feature")
+scalacOptions ++= Seq("-encoding", "UTF-8", "-feature", "-deprecation")
  javacOptions ++= Seq("-encoding", "UTF-8")
 //testOptions in Test += Tests.Argument("-oDF") // stack trace in tests
 javaOptions in run += "-Xmx256m"
